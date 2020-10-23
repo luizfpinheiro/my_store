@@ -1,0 +1,14 @@
+version: "3"
+services:
+  db:
+    image: postgres:9.6
+    container_name: "postgres_my_store"
+    environment:
+      - POSTGRES_DB=my_store
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=my_store_secret
+      - TZ=GMT
+    volumes:
+      - "./data/postgres:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
