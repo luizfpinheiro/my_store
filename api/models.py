@@ -8,8 +8,16 @@ class Product(models.Model):
     price = models.IntegerField(validators=[MinValueValidator(0)])
     available = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.name
+
 class Order(models.Model):
     customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     items = models.ManyToManyField(Product)
     price = models.IntegerField(validators=[MinValueValidator(0)])
     created_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return "{} - {} - {}".format(
+            self.id, self.customer, self.created_at.strftime("%d/%m/%Y - %H:%M")
+        )
